@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static fr.sare.Divider.divide;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DivideTest {
 
@@ -21,5 +22,11 @@ public class DivideTest {
         double result = divide(value, value);
 
         assertEquals(1, result);
+    }
+
+
+    @Property
+    void divisionShouldNotBePossibleByZero(@ForAll int numerator) {
+        assertThrows(DivideByZeroException.class, () -> divide(numerator, 0));
     }
 }
