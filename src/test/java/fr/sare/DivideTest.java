@@ -1,5 +1,7 @@
 package fr.sare;
 
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
 import org.junit.jupiter.api.Test;
 
 import static fr.sare.Divider.divide;
@@ -13,4 +15,9 @@ public class DivideTest {
 
         assertEquals(5, result);
     }// There is a bug even if it is tested
+
+    @Property(tries = 100000)
+    void fuzzTestDivision(@ForAll int numerator, @ForAll int denominator) {
+       divide(numerator, denominator);
+    }
 }
